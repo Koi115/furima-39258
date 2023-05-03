@@ -1,16 +1,16 @@
 # テーブル設計
 
 # users テーブル
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| nickname           | string | null: false |
-| email              | string | null: false |
-| encrypted_password | string | null: false |
-| name_last          | string | null: false |
-| name_first         | string | null: false |
-| name_last_kana     | string | null: false |
-| name_first_kana    | string | null: false |
-| birth_date         | date   | null: false |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| name_last          | string | null: false               |
+| name_first         | string | null: false               |
+| name_last_kana     | string | null: false               |
+| name_first_kana    | string | null: false               |
+| birth_date         | date   | null: false               |
 
 # Association
 - has_many :items
@@ -24,11 +24,11 @@
 | user           | references | null: false, foreign_key: true |
 | item_name      | string     | null: false                    |
 | description    | text       | null: false                    |
-| category_id    | integer     | null: false                    |
-| status_id      | integer     | null: false                    |
-| fee_id         | integer     | null: false                    |
-| prefecture_id  | integer     | null: false                    |
-| period_id      | integer     | null: false                    |
+| category_id    | integer    | null: false                    |
+| status_id      | integer    | null: false                    |
+| fee_id         | integer    | null: false                    |
+| prefecture_id  | integer    | null: false                    |
+| period_id      | integer    | null: false                    |
 | price          | integer    | null: false                    |
 
 # Association
@@ -55,7 +55,7 @@
 | ------------- | ---------- | ------------------------------ |
 | order         | references | null: false, foreign_key: true |
 | postal_code   | string     | null: false                    |
-| pref          | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
 | city          | string     | null: false                    |
 | street        | string     | null: false                    |
 | building      | string     |                                |
