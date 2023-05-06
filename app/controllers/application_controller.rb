@@ -9,10 +9,6 @@ class ApplicationController < ActionController::Base
 
 
 
-
-
-
-
   private
 
   def basic_auth
