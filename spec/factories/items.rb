@@ -1,7 +1,6 @@
 FactoryBot.define do
   factory :item do
     
-    user_id               {'1'}
     name                  {Faker::Name.name}
     description           {Faker::Lorem.sentence}
     category_id           {Faker::Number.between(from: 2, to: 11)}
@@ -16,7 +15,6 @@ FactoryBot.define do
     end
 
    association :user
-    # association :room
 
   end
 end

@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
-  # before do
-  #   @user = FactoryBot.build(:user)
-  # end
-
   before do
     @item = FactoryBot.build(:item)
   end
@@ -61,12 +57,41 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Period can't be blank")
       end
 
+      it "priceが空であれば登録できない" do
+        @item.price = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+
+      it "priceが半角数値以外(全角)であれば登録できない" do
+        @item.price = '９９９'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+
+      it "priceが300より小さければ登録できない" do
+        @item.price = '299'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+      end
+
+      it "price が9,999,999 より大きければ登録できない" do
+        @item.price = '10000000'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+      end
+
       it "Image が空であれば登録できない" do
         @item.image = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
 
+      it 'userが紐付いていないと保存できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
+      end
 
     end
 
