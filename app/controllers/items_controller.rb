@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :destroy]
   before_action :set_item, only: [:edit, :show, :update, :destroy]
   before_action :move_to_index, only: [:edit, :destroy]
+  before_action :move_to_index2, only: [:edit]
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -21,6 +22,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @order = Order.find_by(item_id: @item.id)
   end
 
   def edit
@@ -57,6 +59,12 @@ class ItemsController < ApplicationController
     end
   end
 
+  def move_to_index2
+    @order = Order.find_by(item_id: @item.id)
+    unless @order.nil?
+      redirect_to root_path
+    end 
+  end
 
 
 end

@@ -9,10 +9,11 @@
     <div class="item-img-content">
       <%= image_tag @item.image ,class:"item-box-img" %>
 
-      <%# Issue 10:購入機能実装後、以下を修正・編集 %>
-      <%# <div class="sold-out">
+    <% unless @order.nil? %> 
+        <div class="sold-out">
         <span>Sold Out!!</span>
-      </div> %>
+        </div> 
+    <% end %>
 
     </div>
     <div class="item-price-box">
@@ -26,15 +27,13 @@
 
 
     <%# Issue 10:購入機能実装後、以下を修正・編集 %>
-    <% if user_signed_in? %> 
+    <% if user_signed_in? && @order.nil? %> 
       <% if current_user.id == @item.user_id %>
-        <%# <%= link_to "商品の編集", "#", method: :get, class: "item-red-btn" %> 
         <%= link_to "商品の編集", edit_item_path, method: :get, class: "item-red-btn" %> 
         <p class="or-text">or</p>
         <%= link_to "削除", item_path, method: :delete, class:"item-destroy" %>
       <% else %>
-        <%# Issue 10:購入機能実装後、以下を編集 商品が売れていない場合に表示 %>
-          <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
+          <%= link_to "購入画面に進む", item_orders_path(@item.id), method: :get, class:"item-red-btn"%>
       <% end %>
     <% end %>
 
