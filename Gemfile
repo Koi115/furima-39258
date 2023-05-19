@@ -84,3 +84,5 @@ group :production do
 end
 
 gem 'mail', '2.7.1'
+
+gem 'rails-i18n'

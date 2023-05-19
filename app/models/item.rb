@@ -18,11 +18,11 @@ class Item < ApplicationRecord
                     numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
 
   #--- ジャンルの選択が「---」の時は保存できないようにする
-  validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :status_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :fee_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :period_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :category_id, numericality: { other_than: 1, message: "を入力してください" }
+  validates :status_id, numericality: { other_than: 1, message: "を入力してください" }
+  validates :fee_id, numericality: { other_than: 1, message: "を入力してください" }
+  validates :prefecture_id, numericality: { other_than: 1, message: "を入力してください" }
+  validates :period_id, numericality: { other_than: 1, message: "を入力してください" }
 
   #--- validate for ActiveStorage --#
   validates :image, presence: true
